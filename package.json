@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "build:ui": "cp -rf dist ../phone-book-backend",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
     "preview": "vite preview",
     "server": "npx json-server --port 3001 db.json"
   },
