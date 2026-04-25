@@ -13,6 +13,7 @@ const deletePerson = id => {
     return axios.delete(baseURL + "/" + id)
 }
 
+// Replace does not work yet
 const replace = (newPerson, id) => {
     return axios.put(baseURL + "/" + id, newPerson)
 }

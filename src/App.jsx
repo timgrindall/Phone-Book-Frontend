@@ -52,6 +52,7 @@ const App = () => {
   useEffect(() => {
     personService.getAll()
       .then((response) => {
+        // console.log("response.data")
         // console.log(response.data)
         setPersons(response.data)
       })
@@ -60,25 +61,36 @@ const App = () => {
   const handleDeletePerson = (id) => {
     let passed = confirm("Are you sure you want to delete this entry?")
     if (passed) {
-      console.log("User confirmed request")
+      // console.log("User confirmed request")
       console.log("item id: " + id)
       const name = persons.filter(person => person.id === id)[0].name
 
       // ... call personService
       personService.deletePerson(id)
         .then((response) => {
-          console.log(response)
+          console.log("status:")
+          console.log(response.status)
           // console.log('status: ' + response.status)
-          const newPersons = persons.filter(person => person.id !== id)
-          setPersons(newPersons)
-          setErrorMessage(`'${name}' was successfully deleted.`)
-          setMessageType('message')
-          setTimeout(() => {
-            setErrorMessage(null)
-          }, 5000)
+          /*const newPersons = persons.filter(person => person.id !== id)
+          setPersons(newPersons)*/
+          personService.getAll()
+            .then((response) => {
+              // console.log("response.data")
+              // console.log(response.data)
+              setPersons(response.data)
+              console.log(`successfully fetched ${response.data.length} items`)
+              setErrorMessage(`'${name}' was successfully deleted.`)
+              setMessageType('message')
+              setTimeout(() => {
+                setErrorMessage(null)
+              }, 5000)
+            }).catch(error => {
+                console.log(error)
+                console.log("Data could not be pulled from server.")
+            })
         })
         .catch((response) => {
-          console.log("There was an error deleting the entry")
+          console.log(`There was a problem deleting '${name}'`)
           console.log(response)
           if (response.status === 404) {
             setErrorMessage(`Information for ${name} has already been removed from server.`)

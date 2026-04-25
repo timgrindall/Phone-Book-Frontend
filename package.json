@@ -7,11 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "build:ui": "cp -rf dist ../phone-book-backend",
     "preview": "vite preview",
     "server": "npx json-server --port 3001 db.json"
   },
   "dependencies": {
     "axios": "^1.13.6",
+    "mongoose": "^9.5.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
