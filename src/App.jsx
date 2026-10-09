@@ -55,6 +55,9 @@ const App = () => {
         // console.log("response.data")
         // console.log(response.data)
         setPersons(response.data)
+      }).catch(error => {
+        console.log('Error fetching data')
+        console.log(error)
       })
   }, [])
 
